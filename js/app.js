@@ -17,7 +17,9 @@ game = {
     player_img: new Image(),
     end_game:false,
     game1:false,
-
+    
+    shot_sound:null,
+    boing:null,
 }
 player = {
     x:0,
@@ -67,14 +69,14 @@ function Enemy(x,y){
     this.vive = true;
     this.draw = function () { 
         //Retraso
-        if(this.ciclos > 10){
+        if(this.ciclos > 25){
             //saltitos
             if(this.veces>this.num){
                 this.dx *= -1;
                 this.veces = 0;
                 this.num = 28;
                 this.y += 20;
-                this.dx = (this.dx>0)?  this.dx++:this.dx--;
+                this.dx = (this.dx>0)?this.dx++:this.dx--;
             }else{
                 this.x += this.dx;
             }
@@ -163,7 +165,7 @@ const move_player_auto = () => {
     game.player.draw(player.x);
 }
 const move_enemys_auto = () => {
-    console.log(game.enemy_arr.length);
+    
     for(var i=0;i<game.enemy_arr.length;i++){
         if(game.enemy_arr[i] !=null){
                 game.enemy_arr[i].draw();
@@ -204,15 +206,9 @@ const colision_logic = () => {
                     (bala.y <enemigo.y+enemigo.w)){
                         enemigo.vive=false;
                         game.enemy_arr[i] = null;
-                        
                         game.shot_arr[j] = null;
-                        
                         game.score +=10;
-                        //game.boing.play();
-                        //game.disparo = false;
-                        //game.enemy_arr.splice(i, i);
-                        //game.shot_arr.splice(i, i);
-
+                        game.boing.play();
                     }
 
             }
@@ -261,6 +257,7 @@ window.onload = function() {
 	if(game.canvas && game.canvas.getContext){
 		game.ctx = canvas.getContext("2d");
 		if (game.ctx) {
+            game.boing = document.getElementById("boing");
             game.shot_sound = document.getElementById("disparo");
             title_img()
             game.canvas.addEventListener("click", click_manager, false);
@@ -286,5 +283,4 @@ const mensaje=(cadena,y,tamano=40)=>{
     game.ctx.textAlign = "center";
     game.ctx.fillText(cadena, medio, y);
     game.ctx.restore();	
-
 }
