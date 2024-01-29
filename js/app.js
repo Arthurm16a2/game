@@ -11,6 +11,7 @@ game = {
     score:0,
     enemy_img:null,
     enemy_arr: new Array(),
+    goal:15,
 
     shot_color: "blue",
     shot_arr: new Array(),
@@ -69,7 +70,7 @@ function Enemy(x,y){
     this.vive = true;
     this.draw = function () { 
         //Retraso
-        if(this.ciclos > 25){
+        if(this.ciclos > 15){
             //saltitos
             if(this.veces>this.num){
                 this.dx *= -1;
@@ -190,7 +191,7 @@ const move_bullets = () => {
 const colision_logic = () => {
     let enemigo , bala;
     console.log(game.score)
-    if(game.score >= 100){
+    if(game.score >= game.goal){
         gameOver()
     }
 
@@ -207,7 +208,7 @@ const colision_logic = () => {
                         enemigo.vive=false;
                         game.enemy_arr[i] = null;
                         game.shot_arr[j] = null;
-                        game.score +=10;
+                        game.score +=1;
                         game.boing.play();
                     }
 
@@ -232,7 +233,8 @@ const score=()=>{
     game.ctx.save();
     game.ctx.fillStyle = "white";
     game.ctx.font = "bold 20px Courier";
-    game.ctx.fillText("SCORE: " + game.score, 10, 20);
+    game.ctx.drawImage(game.enemy_img, 95, 0, 35, 30, 10, 10, 35, 30);
+    game.ctx.fillText("Vaquitas: " + game.score, 50, 30);
     game.ctx.restore();	
 
 
@@ -270,7 +272,8 @@ window.onload = function() {
 const gameOver=()=>{
     game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
     game.end_game = true;
-    mensaje("Game Over" ,100,60);
+    mensaje("Lo conseguiste" ,100,60);
+    mensaje("rescataste "+game.goal+" vaquitas" ,170,60);
 }
 
 const mensaje=(cadena,y,tamano=40)=>{
