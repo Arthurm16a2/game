@@ -11,7 +11,7 @@ game = {
     score:0,
     enemy_img:null,
     enemy_arr: new Array(),
-    goal:15,
+    goal:10,
 
     shot_color: "blue",
     shot_arr: new Array(),
@@ -274,7 +274,7 @@ const score=()=>{
     game.ctx.fillStyle = "white";
     game.ctx.font = "bold 20px Courier";
     game.ctx.drawImage(game.enemy_img, 95, 0, 35, 30, 10, 10, 35, 30);
-    game.ctx.fillText("Vaquitas: " + game.score, 50, 30);
+    game.ctx.fillText("Piglets: " + game.score, 50, 30);
     game.ctx.restore();	
 
 
@@ -314,8 +314,9 @@ window.onload = function() {
 const gameOver=()=>{
     game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
     game.end_game = true;
-    mensaje("Lo conseguiste" ,100,60);
-    mensaje("rescataste "+game.goal+" vaquitas" ,170,60);
+    mensaje("You Did It!" ,100,60);
+    mensaje("you've rescued "+game.goal+" piglets" ,170,60);
+    mensaje("Press To Play Again" ,240,60);
 }
 
 const mensaje=(cadena,y,tamano=40)=>{
