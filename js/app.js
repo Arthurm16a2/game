@@ -96,13 +96,50 @@ function Enemy(x,y){
         }
     };
 }
+function imprimir(texto) {
+    console.log(texto);
+  }
 const title_img = () => {
+    game.title_img = false;
+    let delay_in_milis = 3500;
     game.player_img.src = "img/astr1.png";
-    let img = new Image();
-    img.src = "img/title.png";
-    img.onload = () => {
-        game.ctx.drawImage(img,0,0);
-    }
+        let img = new Image();
+        img.src = "img/titles/title1.png";
+        img.onload = () => {
+            game.ctx.drawImage(img,0,0);
+        }
+    setTimeout(() => {
+        img.src = "img/titles/title2.png";
+        img.onload = () => {
+            game.ctx.drawImage(img,0,0);
+        }
+        setTimeout(() => {
+            img.src = "img/titles/title3.png";
+            img.onload = () => {
+                game.ctx.drawImage(img,0,0);
+            }
+            setTimeout(() => {
+                img.src = "img/titles/title4.png";
+                img.onload = () => {
+                    game.ctx.drawImage(img,0,0);
+                }
+                setTimeout(() => {
+                    img.src = "img/titles/title5.png";
+                    img.onload = () => {
+                        game.ctx.drawImage(img,0,0);
+                    }
+                    setTimeout(() => {
+                        game.title_img = true;
+                        img.src = "img/titles/title6.png";
+                        img.onload = () => {
+                            game.ctx.drawImage(img,0,0);
+                        }
+                    }, delay_in_milis);
+                }, delay_in_milis);
+            }, delay_in_milis);
+        }, delay_in_milis);
+    }, delay_in_milis);
+    
 }
 //Mouse actions
 // click 
@@ -116,11 +153,14 @@ const click_manager = (e) => {
         game.shot_sound.play();
     }
     if(game.end_game){
+        delay_in_milis =  3000
         game.game1 = false;
         game.end_game = false;
-        inicio_game_1();
-        animate();
-        
+        //cambiosaqui
+        setTimeout(() => {
+            inicio_game_1();
+            animate();
+        }, delay_in_milis);
     }
 }
 
@@ -261,6 +301,8 @@ window.onload = function() {
 		if (game.ctx) {
             game.boing = document.getElementById("boing");
             game.shot_sound = document.getElementById("disparo");
+
+              
             title_img()
             game.canvas.addEventListener("click", click_manager, false);
 		} else{
