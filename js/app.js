@@ -315,7 +315,7 @@ const gameOver=()=>{
     game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
     game.end_game = true;
     mensaje("You Did It!" ,100,60);
-    mensaje("you've rescued "+game.goal+" piglets" ,170,60);
+    mensaje("You've rescued "+game.goal+" piglets" ,170,60);
     mensaje("Press To Play Again" ,240,60);
 }
 
